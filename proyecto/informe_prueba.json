@@ -1,0 +1,79 @@
+{
+  "valido": false,
+  "filas": 13,
+  "columnas": [
+    "id_cliente",
+    "antiguedad_meses",
+    "num_operaciones",
+    "gasto_total",
+    "ticket_medio",
+    "abandono"
+  ],
+  "incidencias": [
+    {
+      "regla": "faltante",
+      "campo": "id_cliente",
+      "filas": [
+        3
+      ],
+      "accion": "revisar origen;"
+    },
+    {
+      "regla": "faltante",
+      "campo": "gasto_total",
+      "filas": [
+        4
+      ],
+      "accion": "revisar origen;"
+    },
+    {
+      "regla": "duplicado",
+      "campo": "id_cliente",
+      "filas": [
+        0,
+        12
+      ],
+      "accion": "eliminar duplicados;"
+    },
+    {
+      "regla": "no_numerico",
+      "campo": "gasto_total",
+      "filas": [
+        7
+      ],
+      "accion": "revisar valor en origen"
+    },
+    {
+      "regla": "no_entero",
+      "campo": "antiguedad_meses",
+      "filas": [
+        8
+      ],
+      "accion": "revisar origen; no redondear sin evidencia"
+    },
+    {
+      "regla": "no_entero",
+      "campo": "num_operaciones",
+      "filas": [
+        5
+      ],
+      "accion": "revisar origen; no redondear sin evidencia"
+    },
+    {
+      "regla": "no entre 0 y 1",
+      "campo": "abandono",
+      "filas": [
+        2
+      ],
+      "accion": "revisar origen;"
+    },
+    {
+      "regla": "faltante",
+      "campo": "id_cliente",
+      "filas": [
+        104
+      ],
+      "accion": "revisar origen;"
+    }
+  ]
+}
