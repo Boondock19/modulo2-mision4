@@ -13,4 +13,6 @@ FROM clientes c
 LEFT JOIN operaciones o
   ON c.id_cliente = o.id_cliente
 GROUP BY
-  c.id_cliente;
+  c.id_cliente,
+  c.antiguedad_meses,
+  c.abandono;
