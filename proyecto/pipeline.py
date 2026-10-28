@@ -21,7 +21,13 @@ def extraer_dataset():
     # Ejecuta consulta_dataset.sql. Recupera también los ids de clientes.
     # Cierra cursor y conexión en finally, incluso si hay una excepción.
 
-    load_dotenv(BASE / ".env")
+    env_path = next((path for path in (BASE / ".env", BASE.parent / ".env") if path.is_file()), None)
+    if env_path is None:
+        raise FileNotFoundError(
+            "No existe .env en proyecto ni en la carpeta raíz. Copia .env.example como .env "
+            "y rellena tus credenciales."
+        )
+    load_dotenv(env_path, override=True)
     config = {
         "host": os.getenv("DB_HOST"),
         "port": int(os.getenv("DB_PORT", 3306)),
@@ -29,6 +35,9 @@ def extraer_dataset():
         "password": os.getenv("DB_PASSWORD"),
         "database": os.getenv("DB_NAME"),
     }
+
+    if not all(config[key] for key in ["host", "user", "password", "database"]):
+        raise ValueError("Faltan variables de entorno en .env: DB_HOST, DB_USER, DB_PASSWORD, DB_NAME.")
 
     conexion = None
     cursor = None
